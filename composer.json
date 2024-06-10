@@ -63,6 +63,13 @@
             "php-http/discovery": true
         }
     },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "packages/activitylog",
+            "canonical": false
+        }
+    ],
     "minimum-stability": "stable",
     "prefer-stable": true
 }
