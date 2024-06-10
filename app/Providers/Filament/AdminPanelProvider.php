@@ -2,6 +2,9 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Pages\Tenancy\EditHospitalProfile;
+use App\Filament\Pages\Tenancy\RegisterHospital;
+use App\Models\Hospital;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -53,6 +56,13 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-            ]);
+            ])
+            ->tenant(
+                model: Hospital::class,
+                slugAttribute: 'slug',
+                ownershipRelationship: 'hospital'
+            )
+            ->tenantRegistration(RegisterHospital::class)
+            ->tenantProfile(EditHospitalProfile::class);
     }
 }
