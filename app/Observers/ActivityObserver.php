@@ -9,6 +9,9 @@ class ActivityObserver
 {
     public function creating(Activity $activity): void
     {
-        $activity->hospital_id = Filament::getTenant()->id;
+        if (Filament::getTenant()) {
+            $activity->hospital_id = Filament::getTenant()->id;
+        }
+
     }
 }

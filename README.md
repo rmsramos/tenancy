@@ -37,5 +37,10 @@ touch database/database.sqlite
 Run database migrations:
 
 ```sh
-php artisan migrate
+php artisan migrate:fresh --seed
 ```
+
+You're ready to go! Visit the url in your browser, and login with:
+
+-   **Username:** admin@admin.com
+-   **Password:** password
