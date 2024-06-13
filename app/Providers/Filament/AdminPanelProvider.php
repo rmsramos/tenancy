@@ -4,6 +4,7 @@ namespace App\Providers\Filament;
 
 use App\Filament\Pages\Tenancy\EditHospitalProfile;
 use App\Filament\Pages\Tenancy\RegisterHospital;
+use App\Filament\Resources\LogResource;
 use App\Models\Hospital;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -20,6 +21,7 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Rmsramos\Activitylog\ActivitylogPlugin;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -30,6 +32,7 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
+            ->registration()
             ->colors([
                 'primary' => Color::Amber,
             ])
@@ -63,6 +66,10 @@ class AdminPanelProvider extends PanelProvider
                 ownershipRelationship: 'hospital'
             )
             ->tenantRegistration(RegisterHospital::class)
-            ->tenantProfile(EditHospitalProfile::class);
+            ->tenantProfile(EditHospitalProfile::class)
+            ->plugins([
+                ActivitylogPlugin::make()
+                    ->resource(LogResource::class),
+            ]);
     }
 }
