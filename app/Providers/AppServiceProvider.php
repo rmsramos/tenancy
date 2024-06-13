@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Observers\ActivityObserver;
 use Illuminate\Support\ServiceProvider;
+use Spatie\Activitylog\Models\Activity;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +21,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Activity::observe(ActivityObserver::class);
     }
 }
